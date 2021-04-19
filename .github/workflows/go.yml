@@ -18,7 +18,9 @@ jobs:
       with:
         go-version: 1.16
     - name: Build
-      run: go build -v ./test_go
+      working-directory: ./test_go
+      run: go build -v ./...
 
     - name: Test
-      run: go test -v ./test_go
+      working-directory: ./test_go
+      run: go test -v ./...
