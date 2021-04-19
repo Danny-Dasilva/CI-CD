@@ -1,7 +1,12 @@
 package main 
 
-import "fmt"
+import (
+    "fmt"
+    "github.com/Danny-Dasilva/CI-CD/test_go"
+
+)
 
 func main() {
-    fmt.Println("hello world")
+    val := test_go.AddIntNum(1,2)
+    fmt.Println(val)
 }
