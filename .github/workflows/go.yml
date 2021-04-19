@@ -17,11 +17,13 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
-
-    - name: Build
+    - name: list1
       run: echo $PWD
+    - name: list2
       run: ls ./...
+    - name: list3
       run: ./../../test_go/
+    - name: Build
       run: go build -v ./../../test_go/
 
     - name: Test
