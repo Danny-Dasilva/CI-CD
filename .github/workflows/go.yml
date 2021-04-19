@@ -18,9 +18,9 @@ jobs:
       with:
         go-version: 1.16
     - name: list1
-      run: echo $PWD
+      run: ls
     - name: list2
-      run: ls ./...
+      run: ls ./test_go
     - name: list3
       run: ./../../test_go/
     - name: Build
