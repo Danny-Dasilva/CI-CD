@@ -3,9 +3,13 @@ package test_go
 import "fmt"
 
 
-func AddIntNum(num1, num2 int) (l int) {
-    l =  num1 + num2
-    fmt.Println(l)
-    return 
+func Calculate(x int) (result  int) {
+    result = x + 2
+    return result
 }
 
+func main() {
+    fmt.Println("testing tutorial")
+    result := Calculate(2)
+    fmt.Println(result)
+}
