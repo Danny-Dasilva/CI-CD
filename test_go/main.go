@@ -8,6 +8,9 @@ func Calculate(x int) (result  int) {
     return result
 }
 
+func Add(x, y int) int {
+    return x + y
+}
 func main() {
     fmt.Println("testing tutorial")
     result := Calculate(2)

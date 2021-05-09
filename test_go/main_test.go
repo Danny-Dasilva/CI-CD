@@ -5,6 +5,24 @@ import (
 	"testing"
 )
 
+type AddResult struct {
+	x int
+	y int
+	expected int
+
+}
+var addResults = []AddResult {
+	{1, 1, 2},
+
+}
+func TestAdd(t *testing.T) {
+	for _, test := range addResults {
+		result := Add(test.x, test.y)
+		if (result != test.expected) {
+			t.Fatal("Expected Result Not given")
+		}
+	}
+}
 func TestCalculate(t *testing.T) {
 	if Calculate(2) != 4 {
 		t.Error("expected 2+2 to equal 4")
@@ -29,3 +47,4 @@ func TestTableCalculate(t *testing.T) {
 		}
 	}
 }
+
