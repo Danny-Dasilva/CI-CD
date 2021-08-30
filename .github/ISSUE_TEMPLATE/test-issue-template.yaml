@@ -1,5 +1,8 @@
-name: Coral Issue Template
+name: CI/CD Issue Template
 description: Use this template to report any issue
+labels: [bug, triage]
+assignees:
+  - Danny-Dasilva
 body:
   - type: markdown
     attributes:
@@ -73,7 +76,7 @@ body:
     attributes:
       label: Programming Language
       description: What programming language are you using? If "other", please provide more details in the "Description" section above.
-      multiple: true
+      multiple: false
       options:
         - C++
         - Python 3.5
@@ -88,12 +91,3 @@ body:
       label: Relevant Log Output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code.
       render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
-
