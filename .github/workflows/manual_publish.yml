@@ -1,0 +1,17 @@
+name: "Manual publish"
+
+on: 
+  workflow_dispatch:
+    inputs:
+      releaseCandidate:
+        description: 'Release Candidate'     
+        required: true
+        default: 'beta'
+
+jobs:
+    release:
+        name: 🚀 publish
+        runs-on: ubuntu-latest
+        steps:
+        - run: |
+            echo "Release Candidate Version: ${{ github.event.inputs.releaseCandidate }}"
