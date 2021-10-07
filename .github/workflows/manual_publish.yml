@@ -29,7 +29,7 @@ jobs:
         - name: bump version
           run: |
             if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
-                npm version premajor --preid alpha
+                npm version prerelease --preid alpha
             fi
             if [[ "${{ github.event.inputs.releaseCandidate }}" == "beta" ]]; then
                 npm version prerelease --preid beta
