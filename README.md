@@ -1,2 +1,2 @@
 # CI-CD
-testing continuous integration for a couple languages 
+testing continuous integration and release for a couple languages 
