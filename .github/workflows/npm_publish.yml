@@ -26,18 +26,27 @@ jobs:
           run: git config --global user.email 'secrets.EMAIL'
         - name: Get Package Name
           run: |
-            echo "::set-output name=PACKAGE_NAME::node -p "try { require('./package.json').name } catch(e) {}""
+            echo "PACKAGE_NAME=$(node -p "try { require('./package.json').name } catch(e) {}")" >> $GITHUB_ENV
           id: package
+          working-directory: ./my-package
         - name: Retrieve Latest Version
           run: |
-            echo "::set-output name=LATEST_VERSION::npm view ${{ steps.package.outputs.PACKAGE_NAME }} version"
+            echo "::set-output name=LATEST_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
           id: version
         - name: Update to latest version
           run: |
             npm version ${{ steps.version.outputs.LATEST_VERSION }}
+          working-directory: ./my-package
         - name: bump version
-          run: npm version patch -m "[RELEASE] %s"
-          working-directory: ./my-package          
+          run: |
+            if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
+                npm version prerelease --preid alpha
+            fi
+            if [[ "${{ github.event.inputs.releaseCandidate }}" == "beta" ]]; then
+                npm version prerelease --preid beta
+            fi
+          working-directory: ./my-package
+          
         - run: npm install
         - name: 🚀 publish
           run: npm publish --access public

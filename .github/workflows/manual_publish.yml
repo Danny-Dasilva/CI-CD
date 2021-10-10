@@ -10,7 +10,7 @@ on:
 
 jobs:
     release:
-        name: 🚀 publish
+        name: 🚀 Manual publish
         runs-on: ubuntu-latest
         strategy: 
           matrix:
@@ -32,36 +32,30 @@ jobs:
             echo "PACKAGE_NAME=$(node -p "try { require('./package.json').name } catch(e) {}")" >> $GITHUB_ENV
           id: package
           working-directory: ./my-package
-        - name: Log Latest Version
-          run: |
-            echo "${{ env.PACKAGE_NAME }}"
         - name: Retrieve Latest Version
           run: |
             echo "::set-output name=LATEST_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
           id: version
-        - name: Log Latest Version
-          run: |
-            echo "${{ steps.version.outputs.LATEST_VERSION }}"
         - name: Update to latest version
           run: |
             npm version ${{ steps.version.outputs.LATEST_VERSION }}
           working-directory: ./my-package
-        # - name: bump version
-        #   run: |
-        #     if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
-        #         npm version prerelease --preid alpha
-        #     fi
-        #     if [[ "${{ github.event.inputs.releaseCandidate }}" == "beta" ]]; then
-        #         npm version prerelease --preid beta
-        #     fi
-        #   working-directory: ./my-package
+        - name: bump version
+          run: |
+            if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
+                npm version prerelease --preid alpha
+            fi
+            if [[ "${{ github.event.inputs.releaseCandidate }}" == "beta" ]]; then
+                npm version prerelease --preid beta
+            fi
+          working-directory: ./my-package
           
-        # - run: npm install
-        # - name: 🚀 publish
-        #   run: npm publish --access public
-        #   working-directory: ./my-package
-        #   env:
-        #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN}}
-        # - name: Push git
-        #   working-directory: ./my-package
-        #   run: git commit -a -m "[RELEASE] %s" && git push
+        - run: npm install
+        - name: 🚀 publish
+          run: npm publish --access public
+          working-directory: ./my-package
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN}}
+        - name: Push git
+          working-directory: ./my-package
+          run: git commit -a -m "[RELEASE] %s" && git push
