@@ -35,9 +35,6 @@ jobs:
                 npm version prerelease --preid beta
             fi
           working-directory: ./my-package
-        - name: Push git
-          working-directory: ./my-package
-          run: git commit -a -m "[RELEASE] %s" && git push
           
         - run: npm install
         - name: 🚀 publish
@@ -45,3 +42,6 @@ jobs:
           working-directory: ./my-package
           env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN}}
+        - name: Push git
+          working-directory: ./my-package
+          run: git commit -a -m "[RELEASE] %s" && git push
