@@ -37,7 +37,7 @@ jobs:
             echo "${{ env.PACKAGE_NAME }}"
         - name: Retrieve Latest Version
           run: |
-            echo "::set-output name=LATEST_VERSION::npm view ${{ env.PACKAGE_NAME }} version"
+            echo "::set-output name=LATEST_VERSION::$(npm view ${{ env.PACKAGE_NAME }} version)"
           id: version
         - name: Log Latest Version
           run: |
