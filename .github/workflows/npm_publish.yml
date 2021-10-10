@@ -35,7 +35,7 @@ jobs:
           id: version
         - name: Update to latest version
           run: |
-            npm version ${{ steps.version.outputs.LATEST_VERSION }}
+            npm version ${{ steps.version.outputs.LATEST_VERSION }} --allow-same-version
           working-directory: ./my-package
         - name: bump version
           run: |
