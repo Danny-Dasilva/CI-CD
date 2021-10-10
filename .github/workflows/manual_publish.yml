@@ -31,6 +31,7 @@ jobs:
           run: |
             echo "PACKAGE_NAME=$(node -p "try { require('./package.json').name } catch(e) {}")" >> $GITHUB_ENV
           id: package
+          working-directory: ./my-package
         - name: Log Latest Version
           run: |
             echo "${{ env.PACKAGE_NAME }}"
@@ -44,6 +45,7 @@ jobs:
         - name: Update to latest version
           run: |
             npm version ${{ steps.version.outputs.LATEST_VERSION }}
+          working-directory: ./my-package
         # - name: bump version
         #   run: |
         #     if [[ "${{ github.event.inputs.releaseCandidate }}" == "alpha" ]]; then
