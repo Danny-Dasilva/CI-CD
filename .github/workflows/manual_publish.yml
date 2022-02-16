@@ -24,6 +24,8 @@ jobs:
           shell: bash
           run: echo "##[set-output name=branch;]${GITHUB_REF#refs/heads/}"
           id: get_branch_name
+        - name: Echo Version Branch
+          run: echo Currently running on Branch ${{ steps.get_branch_name.outputs.branch  }}
         - uses: actions/checkout@v2
         - name: 🟢 Use Node.js ${{ matrix.node-version }}
           uses: actions/setup-node@v1
